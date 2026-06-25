@@ -385,20 +385,17 @@
 
     .project-image {
       width: 100%;
-      height: 220px;
-      overflow: hidden;
-      border-bottom: 1px solid var(--rule);
+      padding: 24px 36px 32px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: center;
+      background: var(--page);
     }
     .project-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+      max-width: 100%;
+      height: auto;
       display: block;
-      transition: transform 0.4s ease;
-    }
-    .project-card:hover .project-image img {
-      transform: scale(1.02);
+      border-radius: 4px;
     }
       padding: 20px 36px;
       display: flex;
@@ -702,7 +699,7 @@
         <img src="heatpumpcoaching.png" alt="Energy coaching access map across Massachusetts municipalities" />
       </div>
 
-      <div class="project-body"> <strong>Only 62 of 351 municipalities have coaching</strong>, covering just 39% of the state's population. The question: is access correlated with income?
+      <div class="project-footer"> <strong>Only 62 of 351 municipalities have coaching</strong>, covering just 39% of the state's population. The question: is access correlated with income?
           </p>
         </div>
         <div class="project-col">
@@ -756,10 +753,6 @@
         <span class="project-badge badge-abm">NetLogo · ABM</span>
       </div>
 
-      <div class="project-image">
-        <img src="urbanheat.png" alt="Urban heat island simulation showing temperature distribution across land cover types" />
-      </div>
-
       <div class="project-body">
         <div class="project-col">
           <p class="col-label">The Problem</p>
@@ -793,6 +786,10 @@
             The most striking finding: <strong>when concrete and grass are interleaved rather than segregated</strong>, concrete temperatures drop meaningfully, suggesting mixed land cover is more effective than isolated green space. Recommendations include greening transit corridors (e.g. grass beneath Green Line tracks, as in European streetcar systems), and using stormwater management infrastructure to replace impervious surfaces with vegetation in targeted areas.
           </p>
         </div>
+      </div>
+
+      <div class="project-image">
+        <img src="urbanheat.png" alt="Urban heat island simulation showing temperature distribution across land cover types" />
       </div>
 
       <div class="project-footer">
