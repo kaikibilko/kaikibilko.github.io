@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kai Kibilko | Urban Informatics Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --ink-light: #5a5a5a;
+      --ink-faint: #9a9a9a;
+      --page: #f7f5f0;
+      --card: #ffffff;
+      --rule: #e0ddd7;
+
+      /* Progress Pride accent palette */
+      --teal-dark: #078D70;
+      --teal: #26CEAA;
+      --teal-light: #d0f5ec;
+      --mint: #98E8C1;
+      --blue-soft: #7BADE2;
+      --blue-light: #ddeaf9;
+      --indigo: #5049CC;
+      --indigo-light: #e4e3f8;
+      --purple: #3D1A78;
+      --purple-light: #ece5f5;
+
+      /* mapped roles */
+      --green: var(--teal-dark);
+      --green-light: var(--teal-light);
+      --amber: var(--indigo);
+      --amber-light: var(--indigo-light);
+      --blue: var(--purple);
+      --tag-bg: #efefef;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--page);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--page);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 48px;
+      height: 56px;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-light);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .hero-about {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 72px 48px 64px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-about-inner {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 52px;
+      align-items: start;
+    }
+    .ha-photo {
+      display: flex;
+      flex-direction: column;
+    }
+    .ha-photo .photo-frame {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3/4;
+      border-radius: 8px;
+    }
+    .ha-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .ha-hero {
+      padding-bottom: 36px;
+    }
+    .ha-divider {
+      height: 1px;
+      background: var(--rule);
+      margin-bottom: 32px;
+    }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 20px;
+    }
+    .pride-bar {
+      display: flex;
+      height: 4px;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      width: 140px;
+    }
+    .pride-bar span { flex: 1; }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--ink-light);
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--ink-light);
+      max-width: 560px;
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+    .hero-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--teal-dark);
+      color: white;
+    }
+    .btn-primary:hover { background: #056a55; }
+    .btn-secondary {
+      border: 1.5px solid var(--rule);
+      color: var(--ink);
+      background: transparent;
+    }
+    .btn-secondary:hover { border-color: var(--ink-light); }
+
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 48px;
+      border-top: 1px solid var(--rule);
+    }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 40px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .about-photo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .photo-frame {
+      width: 180px;
+      height: 220px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      background: var(--tag-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink-faint);
+      font-size: 13px;
+      text-align: center;
+      padding: 16px;
+    }
+    .photo-placeholder svg { opacity: 0.3; }
+    .about-bio h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .about-bio p {
+      color: var(--ink-light);
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    .skills-block { display: flex; flex-direction: column; gap: 20px; }
+    .skill-group-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 8px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      font-size: 13px;
+      padding: 4px 11px;
+      background: var(--tag-bg);
+      border-radius: 3px;
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .exp-item:first-child { border-top: 1px solid var(--rule); }
+    .exp-meta { padding-top: 2px; }
+    .exp-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+    }
+    .exp-org {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-light);
+    }
+    .exp-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .exp-desc {
+      font-size: 14px;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+
+    /* PROJECTS */
+    .projects-list { display: flex; flex-direction: column; gap: 48px; }
+
+    .project-card {
+      background: var(--card);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--rule);
+    }
+    .project-header {
+      padding: 32px 36px 24px;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .project-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-faint);
+      margin-bottom: 8px;
+      letter-spacing: 0.1em;
+    }
+    .project-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .project-subtitle {
+      font-size: 14px;
+      color: var(--ink-light);
+    }
+    .project-badge {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      font-family: 'DM Mono', monospace;
+    }
+    .badge-gis { background: var(--teal-light); color: var(--teal-dark); }
+    .badge-abm { background: var(--indigo-light); color: var(--indigo); }
+    .badge-tbd { background: var(--purple-light); color: var(--purple); }
+
+    .project-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .project-col {
+      padding: 24px 28px;
+      border-right: 1px solid var(--rule);
+    }
+    .project-col:last-child { border-right: none; }
+    .col-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 10px;
+    }
+    .col-text {
+      font-size: 14px;
+      color: var(--ink-light);
+      line-height: 1.6;
+    }
+    .col-text strong { color: var(--ink); font-weight: 600; }
+
+    .project-footer {
+      padding: 20px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .method-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .method-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 3px;
+      background: var(--tag-bg);
+      color: var(--ink-light);
+    }
+
+    /* STAT BARS */
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .stat-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-label { font-size: 12px; color: var(--ink-light); }
+    .stat-bar-wrap {
+      height: 6px;
+      background: var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .stat-bar {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 1s ease;
+    }
+    .bar-green { background: var(--green); }
+    .bar-amber { background: var(--amber); }
+    .stat-value { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink-faint); }
+
+    /* COMING SOON CARD */
+    .project-card.coming-soon {
+      border-style: dashed;
+      background: transparent;
+    }
+    .coming-soon-inner {
+      padding: 48px 36px;
+      text-align: center;
+    }
+    .coming-soon-inner .project-title { color: var(--ink-light); margin-bottom: 8px; }
+    .coming-soon-inner p { color: var(--ink-faint); font-size: 14px; }
+
+    /* EDUCATION */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 24px 28px;
+    }
+    .edu-degree {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .edu-school {
+      font-size: 14px;
+      color: var(--ink-light);
+      margin-bottom: 12px;
+    }
+    .edu-detail {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+    }
+
+    /* AWARDS */
+    .awards-list { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+    .award-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--ink-light);
+    }
+    .award-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+    .bar-green { background: var(--teal-dark); }
+    .bar-amber { background: var(--indigo); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--rule);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 13px; color: var(--ink-faint); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--ink-light);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 720px) {
+      nav { padding: 0 24px; }
+      nav .nav-links { display: none; }
+      .hero-about, section, footer { padding-left: 24px; padding-right: 24px; }
+      .hero-about-inner { grid-template-columns: 1fr; gap: 32px; }
+      .ha-photo { align-items: center; }
+      .ha-photo .photo-frame { width: 160px; min-height: 200px; flex: none; }
+      .about-grid, .project-body, .edu-grid { grid-template-columns: 1fr; }
+      .project-col { border-right: none; border-bottom: 1px solid var(--rule); }
+      .project-col:last-child { border-bottom: none; }
+      .exp-item { grid-template-columns: 1fr; gap: 4px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">Kai Kibilko</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+</nav>
+
+<!-- HERO + ABOUT COMBINED -->
+<div class="hero-about" id="about">
+
+  <!-- top: photo + title side by side -->
+  <div class="hero-about-inner">
+    <div class="ha-photo">
+      <div class="photo-frame">
+        <img src="headshot.jpg" alt="Kai Kibilko" />
+      </div>
+    </div>
+    <div class="ha-hero">
+      <p class="hero-eyebrow">Urban Informatics · Energy Policy · Data Analysis</p>
+      <h1>Kai Kibilko<br><em>Emerging Sustainability &amp; Energy Policy Professional</em></h1>
+      <p class="hero-sub">
+        Graduate student at Northeastern University studying Urban Informatics, with hands-on experience in energy efficiency policy, state regulatory research, and community outreach across Massachusetts.
+      </p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/kaikibilko/" target="_blank">LinkedIn</a>
+        <a class="btn btn-secondary" href="mailto:kaikibilko345@gmail.com">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- divider -->
+  <div class="ha-divider"></div>
+
+  <!-- bottom: about + skills full width -->
+  <p class="section-label" style="margin-bottom:28px;">Background & Skills</p>
+  <div class="about-grid">
+    <div class="about-bio">
+      <h2>Translating data into<br>policy insight.</h2>
+      <p>
+        I work at the intersection of urban data analysis and clean energy policy. My background spans state regulatory research, municipal stakeholder engagement, and program evaluation across Massachusetts energy agencies and nonprofits.
+      </p>
+      <p>
+        I'm drawn to questions about equity in the clean energy transition: who gets access to programs, resources, and information, and who doesn't.
+      </p>
+    </div>
+    <div class="skills-block">
+      <div>
+        <p class="skill-group-label">Technical Tools</p>
+        <div class="tags">
+          <span class="tag">ArcGIS</span>
+          <span class="tag">QGIS</span>
+          <span class="tag">R</span>
+          <span class="tag">Python</span>
+          <span class="tag">Stata</span>
+          <span class="tag">Tableau</span>
+          <span class="tag">Excel</span>
+          <span class="tag">NetLogo</span>
+        </div>
+      </div>
+      <div>
+        <p class="skill-group-label">Methods</p>
+        <div class="tags">
+          <span class="tag">GIS Mapping</span>
+          <span class="tag">Spatial Analysis</span>
+          <span class="tag">Agent-Based Modeling</span>
+          <span class="tag">Policy Research</span>
+          <span class="tag">Data Cleaning</span>
+          <span class="tag">Hotspot Analysis</span>
+        </div>
+      </div>
+      <div>
+        <p class="skill-group-label">Policy Areas</p>
+        <div class="tags">
+          <span class="tag">Clean Heat</span>
+          <span class="tag">Energy Efficiency</span>
+          <span class="tag">Demand Response</span>
+          <span class="tag">Grid Modernization</span>
+          <span class="tag">Building Electrification</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Professional Experience</p>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Jan 2026 – Present</p>
+        <p class="exp-org">MA Exec. Office of Energy & Environmental Affairs</p>
+      </div>
+      <div>
+        <p class="exp-title">Office of Energy Transformation Fellow</p>
+        <p class="exp-desc">Supporting the Decarbonizing the Peak working group on demand response, battery storage, and grid modernization. Developing statewide CRM tools and leading community outreach across Massachusetts municipalities.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Sep – Dec 2025</p>
+        <p class="exp-org">Northeast Energy Efficiency Partnerships</p>
+      </div>
+      <div>
+        <p class="exp-title">Energy Efficiency Intern – Community Solutions</p>
+        <p class="exp-desc">Designed outreach tools to support municipal adoption of energy coaching programs across 40+ Massachusetts communities. Researched federal and state incentives for heat pumps and electrification upgrades.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Jun 2024 – Oct 2024</p>
+        <p class="exp-org">MA Department of Environmental Protection</p>
+      </div>
+      <div>
+        <p class="exp-title">Intern – Equity in the Clean Heat Standard</p>
+        <p class="exp-desc">Collected and cleaned rate data from nearly 50 regulated energy providers. Analyzed utility rate structures alongside census data to identify geographic and demographic patterns in energy access. Drafted policy briefs for Clean Heat Standard regulatory development.</p>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <p class="exp-date">Jun 2023 – Dec 2024</p>
+        <p class="exp-org">Boston University School of Public Health</p>
+      </div>
+      <div>
+        <p class="exp-title">Undergraduate Research Fellow</p>
+        <p class="exp-desc">Co-authored a peer-reviewed publication examining drivers of poor indoor air quality in multi-family housing, connecting weatherization, energy efficiency, and resident health outcomes.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">Projects</p>
+  <div class="projects-list">
+
+    <!-- PROJECT 1: GIS -->
+    <div class="project-card">
+      <div class="project-header">
+        <div>
+          <p class="project-number">01 · GIS SPATIAL ANALYSIS</p>
+          <h2 class="project-title">Energy Coaching Access<br>in Massachusetts</h2>
+          <p class="project-subtitle">Do wealthier municipalities have more access to clean energy coaching programs?</p>
+        </div>
+        <span class="project-badge badge-gis">ArcGIS · Spatial Analysis</span>
+      </div>
+
+      <div class="project-body">
+        <div class="project-col">
+          <p class="col-label">The Problem</p>
+          <p class="col-text">
+            Energy coaching programs that help residents understand and upgrade home heating systems are unevenly distributed across Massachusetts. <strong>Only 62 of 351 municipalities have coaching</strong>, covering just 39% of the state's population. The question: is access correlated with income?
+          </p>
+        </div>
+        <div class="project-col">
+          <p class="col-label">Methods Used</p>
+          <p class="col-text">
+            Combined NEEP coaching data with MassDOR income data and MassGIS municipal boundaries. Used <strong>spatial joins, summary statistics, histogram analysis, and hotspot analysis</strong> in ArcGIS to compare income and population distributions between coaching and non-coaching municipalities.
+          </p>
+          <div class="stat-row" style="margin-top:16px;">
+            <div class="stat-item">
+              <div style="display:flex;justify-content:space-between;"><span class="stat-label">Median income, with coaching</span><span class="stat-value">$79,905</span></div>
+              <div class="stat-bar-wrap"><div class="stat-bar bar-green" style="width:79%"></div></div>
+            </div>
+            <div class="stat-item">
+              <div style="display:flex;justify-content:space-between;"><span class="stat-label">Median income, without coaching</span><span class="stat-value">$45,421</span></div>
+              <div class="stat-bar-wrap"><div class="stat-bar bar-green" style="width:45%"></div></div>
+            </div>
+            <div class="stat-item">
+              <div style="display:flex;justify-content:space-between;"><span class="stat-label">Statewide median income</span><span class="stat-value">$47,294</span></div>
+              <div class="stat-bar-wrap"><div class="stat-bar bar-green" style="width:47%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-col">
+          <p class="col-label">Policy Implications</p>
+          <p class="col-text">
+            Coaching is concentrated in affluent, densely populated suburbs, particularly <strong>MetroWest and North Shore</strong>, while lower-income communities with the highest need go underserved. Recommendations include expanding the MEM Grant model to fund regional coaching programs, grouping smaller municipalities to create sufficient demand, and providing implementation toolkits to communities without resources to build programs independently.
+          </p>
+        </div>
+      </div>
+
+      <div class="project-footer">
+        <div class="method-tags">
+          <span class="method-tag">ArcGIS</span>
+          <span class="method-tag">Spatial Join</span>
+          <span class="method-tag">Hotspot Analysis</span>
+          <span class="method-tag">Summary Statistics</span>
+          <span class="method-tag">Excel</span>
+        </div>
+        <a class="btn btn-secondary" href="Final-Report-GIS-KaiKibilko-1.pdf" target="_blank" style="font-size:13px;">Full Report →</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 2: ABM -->
+    <div class="project-card">
+      <div class="project-header">
+        <div>
+          <p class="project-number">02 · AGENT-BASED MODELING</p>
+          <h2 class="project-title">Simulating Urban Heat<br>Island Dynamics</h2>
+          <p class="project-subtitle">How do spatial distributions of land cover types affect heat in urban environments?</p>
+        </div>
+        <span class="project-badge badge-abm">NetLogo · ABM</span>
+      </div>
+
+      <div class="project-body">
+        <div class="project-col">
+          <p class="col-label">The Problem</p>
+          <p class="col-text">
+            Urban heat islands (UHIs) emerge from complex interactions between impervious surfaces, vegetation, and spatial layout, but these dynamics are expensive and difficult to measure directly. The question: <strong>how do the quantity and spatial arrangement of land covers shape heat patterns</strong> in an urban environment?
+          </p>
+        </div>
+        <div class="project-col">
+          <p class="col-label">Methods Used</p>
+          <p class="col-text">
+            Built an <strong>agent-based model in NetLogo</strong> simulating concrete patches, grass patches, and tree agents with calibrated heat inflow, outflow, and diffusion rates. Ran scenario testing across concrete quantity (25/50/75%), tree count (0/10/20), tree radius (1/3/5), and clustering (0/5/10) with 30 runs each to isolate the effect of each variable on mean temperatures.
+          </p>
+          <div class="stat-row" style="margin-top:16px;">
+            <div class="stat-item">
+              <div style="display:flex;justify-content:space-between;"><span class="stat-label">25% concrete, overall mean temp</span><span class="stat-value">83.3°F</span></div>
+              <div class="stat-bar-wrap"><div class="stat-bar bar-amber" style="width:40%"></div></div>
+            </div>
+            <div class="stat-item">
+              <div style="display:flex;justify-content:space-between;"><span class="stat-label">75% concrete, overall mean temp</span><span class="stat-value">95.8°F</span></div>
+              <div class="stat-bar-wrap"><div class="stat-bar bar-amber" style="width:70%"></div></div>
+            </div>
+            <div class="stat-item">
+              <div style="display:flex;justify-content:space-between;"><span class="stat-label">Temp reduction, 0 to 20 trees</span><span class="stat-value">−2.7°F</span></div>
+              <div class="stat-bar-wrap"><div class="stat-bar bar-green" style="width:30%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-col">
+          <p class="col-label">Policy Implications</p>
+          <p class="col-text">
+            The most striking finding: <strong>when concrete and grass are interleaved rather than segregated</strong>, concrete temperatures drop meaningfully, suggesting mixed land cover is more effective than isolated green space. Recommendations include greening transit corridors (e.g. grass beneath Green Line tracks, as in European streetcar systems), and using stormwater management infrastructure to replace impervious surfaces with vegetation in targeted areas.
+          </p>
+        </div>
+      </div>
+
+      <div class="project-footer">
+        <div class="method-tags">
+          <span class="method-tag">NetLogo</span>
+          <span class="method-tag">Agent-Based Modeling</span>
+          <span class="method-tag">Scenario Testing</span>
+          <span class="method-tag">Sensitivity Analysis</span>
+          <span class="method-tag">Parameterization</span>
+        </div>
+        <a class="btn btn-secondary" href="Final-ABM-Report.pdf" target="_blank" style="font-size:13px;">Full Report →</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 3: COMING SOON -->
+    <div class="project-card coming-soon">
+      <div class="coming-soon-inner">
+        <p class="project-number" style="text-align:center; margin-bottom:12px;">03 · IN PROGRESS</p>
+        <h2 class="project-title">Project Three</h2>
+        <p>Coming soon, check back later.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Education & Recognition</p>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <p class="edu-degree">MS Urban Informatics</p>
+      <p class="edu-school">Northeastern University · Climate & Resilience</p>
+      <p class="edu-detail">Sep 2025 – Dec 2026 · Boston, MA</p>
+      <p class="edu-detail">GPA: 3.83 / 4.0</p>
+    </div>
+    <div class="edu-card">
+      <p class="edu-degree">BA Public Health</p>
+      <p class="edu-school">Brandeis University · Magna Cum Laude</p>
+      <p class="edu-detail">Graduated May 2025 · Waltham, MA</p>
+      <p class="edu-detail">GPA: 3.86 / 4.0</p>
+      <p class="edu-detail" style="margin-top:4px;">Minors: Environmental Studies · Social Policy · Legal Studies</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 36px;">
+    <p class="skill-group-label" style="margin-bottom:16px;">Awards & Fellowships</p>
+    <div class="awards-list">
+      <div class="award-item">
+        <span class="award-dot"></span>
+        <span>Eli J. & Phyllis N. Segal Citizen Leadership Program</span>
+      </div>
+      <div class="award-item">
+        <span class="award-dot"></span>
+        <span>Health Effects Institute Environmental Health Fellowship</span>
+      </div>
+      <div class="award-item">
+        <span class="award-dot"></span>
+        <span>Co-author, peer-reviewed publication on indoor air quality in multi-family housing, Boston University School of Public Health</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Kai Kibilko</p>
+  <div class="footer-links">
+    <a href="mailto:kaikibilko345@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/kaikibilko/" target="_blank">LinkedIn</a>
+    <a href="tel:6179918024">617-991-8024</a>
+  </div>
+</footer>
+
+</body>
+</html>
