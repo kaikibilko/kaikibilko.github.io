@@ -294,6 +294,24 @@
       color: var(--ink);
       font-family: 'DM Mono', monospace;
     }
+    /* Technical Tools — teal */
+    .tag-group-tools .skill-group-label { color: var(--blue-soft); }
+    .tag-group-tools .tag {
+      background: var(--blue-light);
+      color: #2a6fad;
+    }
+    /* Methods — same */
+    .tag-group-methods .skill-group-label { color: var(--blue-soft); }
+    .tag-group-methods .tag {
+      background: var(--blue-light);
+      color: #2a6fad;
+    }
+    /* Policy Areas — same */
+    .tag-group-policy .skill-group-label { color: var(--blue-soft); }
+    .tag-group-policy .tag {
+      background: var(--blue-light);
+      color: #2a6fad;
+    }
 
     /* EXPERIENCE */
     .exp-list { display: flex; flex-direction: column; gap: 0; }
@@ -348,7 +366,7 @@
     .project-number {
       font-family: 'DM Mono', monospace;
       font-size: 11px;
-      color: var(--purple);
+      color: var(--ink-faint);
       margin-bottom: 8px;
       letter-spacing: 0.1em;
     }
@@ -373,8 +391,22 @@
       font-family: 'DM Mono', monospace;
     }
     .badge-gis { background: var(--teal-light); color: var(--teal-dark); }
-    .badge-abm { background: var(--indigo-light); color: var(--indigo); }
-    .badge-tbd { background: var(--purple-light); color: var(--purple); }
+    .badge-abm { background: var(--purple-light); color: var(--purple); }
+    .badge-tbd { background: var(--blue-light); color: #2a6fad; }
+
+    /* GIS project — teal theme */
+    .project-gis { border-top: 3px solid var(--teal-dark); }
+    .project-gis .project-number { color: var(--teal-dark); }
+    .project-gis .col-label { color: var(--teal-dark); }
+    .project-gis .stat-bar { background: var(--teal-dark); }
+    .project-gis .method-tag { background: var(--blue-light); color: var(--blue-soft); }
+
+    /* ABM project — purple theme */
+    .project-abm { border-top: 3px solid var(--purple); }
+    .project-abm .project-number { color: var(--purple); }
+    .project-abm .col-label { color: var(--purple); }
+    .project-abm .stat-bar { background: var(--purple); }
+    .project-abm .method-tag { background: var(--blue-light); color: var(--blue-soft); }
 
     .project-body {
       display: grid;
@@ -391,7 +423,7 @@
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--indigo);
+      color: var(--ink-faint);
       margin-bottom: 10px;
     }
     .col-text {
@@ -426,8 +458,8 @@
       font-size: 12px;
       padding: 3px 10px;
       border-radius: 3px;
-      background: var(--tag-bg);
-      color: var(--ink-light);
+      background: var(--teal-light);
+      color: var(--teal-dark);
     }
 
     /* STAT BARS */
@@ -608,7 +640,7 @@
       </p>
     </div>
     <div class="skills-block">
-      <div>
+      <div class="tag-group-tools">
         <p class="skill-group-label">Technical Tools</p>
         <div class="tags">
           <span class="tag">ArcGIS</span>
@@ -621,7 +653,7 @@
           <span class="tag">NetLogo</span>
         </div>
       </div>
-      <div>
+      <div class="tag-group-methods">
         <p class="skill-group-label">Methods</p>
         <div class="tags">
           <span class="tag">GIS Mapping</span>
@@ -632,7 +664,7 @@
           <span class="tag">Hotspot Analysis</span>
         </div>
       </div>
-      <div>
+      <div class="tag-group-policy">
         <p class="skill-group-label">Policy Areas</p>
         <div class="tags">
           <span class="tag">Clean Heat</span>
@@ -704,7 +736,7 @@
   <div class="projects-list">
 
     <!-- PROJECT 1: GIS -->
-    <div class="project-card">
+    <div class="project-card project-gis">
       <div class="project-header">
         <div>
           <p class="project-number">01 · GIS SPATIAL ANALYSIS</p>
@@ -729,15 +761,15 @@
           <div class="stat-row" style="margin-top:16px;">
             <div class="stat-item">
               <div style="display:flex;justify-content:space-between;"><span class="stat-label">Median income, with coaching</span><span class="stat-value">$79,905</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar bar-green" style="width:79%"></div></div>
+              <div class="stat-bar-wrap"><div class="stat-bar" style="width:79%"></div></div>
             </div>
             <div class="stat-item">
               <div style="display:flex;justify-content:space-between;"><span class="stat-label">Median income, without coaching</span><span class="stat-value">$45,421</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar bar-green" style="width:45%"></div></div>
+              <div class="stat-bar-wrap"><div class="stat-bar" style="width:45%"></div></div>
             </div>
             <div class="stat-item">
               <div style="display:flex;justify-content:space-between;"><span class="stat-label">Statewide median income</span><span class="stat-value">$47,294</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar bar-green" style="width:47%"></div></div>
+              <div class="stat-bar-wrap"><div class="stat-bar" style="width:47%"></div></div>
             </div>
           </div>
         </div>
@@ -769,7 +801,7 @@
     </div>
 
     <!-- PROJECT 2: ABM -->
-    <div class="project-card">
+    <div class="project-card project-abm">
       <div class="project-header">
         <div>
           <p class="project-number">02 · AGENT-BASED MODELING</p>
@@ -793,15 +825,15 @@
           <div class="stat-row" style="margin-top:16px;">
             <div class="stat-item">
               <div style="display:flex;justify-content:space-between;"><span class="stat-label">25% concrete, overall mean temp</span><span class="stat-value">83.3°F</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar bar-amber" style="width:40%"></div></div>
+              <div class="stat-bar-wrap"><div class="stat-bar" style="width:40%"></div></div>
             </div>
             <div class="stat-item">
               <div style="display:flex;justify-content:space-between;"><span class="stat-label">75% concrete, overall mean temp</span><span class="stat-value">95.8°F</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar bar-amber" style="width:70%"></div></div>
+              <div class="stat-bar-wrap"><div class="stat-bar" style="width:70%"></div></div>
             </div>
             <div class="stat-item">
               <div style="display:flex;justify-content:space-between;"><span class="stat-label">Temp reduction, 0 to 20 trees</span><span class="stat-value">−2.7°F</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar bar-amber" style="width:30%"></div></div>
+              <div class="stat-bar-wrap"><div class="stat-bar" style="width:30%"></div></div>
             </div>
           </div>
         </div>
