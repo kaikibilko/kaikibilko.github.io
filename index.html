@@ -13,32 +13,20 @@
       --page: #f7f5f0;
       --card: #ffffff;
       --rule: #e0ddd7;
-
-      /* Progress Pride accent palette */
       --teal-dark: #078D70;
       --teal: #26CEAA;
       --teal-light: #d0f5ec;
-      --mint: #98E8C1;
       --blue-soft: #7BADE2;
       --blue-light: #ddeaf9;
       --indigo: #5049CC;
       --indigo-light: #e4e3f8;
       --purple: #3D1A78;
       --purple-light: #ece5f5;
-
-      /* mapped roles */
-      --green: var(--teal-dark);
-      --green-light: var(--teal-light);
-      --amber: var(--indigo);
-      --amber-light: var(--indigo-light);
-      --blue: var(--purple);
       --tag-bg: #efefef;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--page);
       color: var(--ink);
@@ -65,6 +53,8 @@
       font-size: 18px;
       font-weight: 700;
       letter-spacing: -0.01em;
+      text-decoration: none;
+      color: var(--ink);
     }
     .nav-links {
       display: flex;
@@ -81,6 +71,32 @@
     }
     .nav-links a:hover { color: var(--teal-dark); }
 
+    /* BACK TO TOP */
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      background: var(--teal-dark);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 200;
+      text-decoration: none;
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: all; }
+    .back-to-top:hover { background: #056a55; }
+
+    /* HERO + ABOUT */
     .hero-about {
       max-width: 1100px;
       margin: 0 auto;
@@ -93,30 +109,25 @@
       gap: 52px;
       align-items: stretch;
     }
-    .ha-photo {
-      display: flex;
-      flex-direction: column;
-    }
+    .ha-photo { display: flex; flex-direction: column; }
     .ha-photo .photo-frame {
       flex: 1;
       width: 100%;
       min-height: 260px;
       border-radius: 8px;
-      aspect-ratio: unset;
+      overflow: hidden;
+      border: 1px solid var(--rule);
     }
-    .ha-content {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+    .ha-photo .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
-    .ha-hero {
-      padding-bottom: 36px;
-    }
-    .ha-divider {
-      height: 1px;
-      background: var(--rule);
-      margin-bottom: 32px;
-    }
+    .ha-hero { padding-bottom: 36px; }
+    .ha-divider { height: 1px; background: var(--rule); margin-bottom: 32px; }
+
     .hero-eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 12px;
@@ -125,15 +136,6 @@
       color: var(--teal-dark);
       margin-bottom: 20px;
     }
-    .pride-bar {
-      display: flex;
-      height: 4px;
-      border-radius: 2px;
-      overflow: hidden;
-      margin-bottom: 28px;
-      width: 140px;
-    }
-    .pride-bar span { flex: 1; }
     .hero h1 {
       font-family: 'Nunito', sans-serif;
       font-weight: 700;
@@ -149,7 +151,6 @@
       color: var(--ink-light);
       display: block;
       margin-top: 6px;
-      letter-spacing: 0em;
     }
     .hero-sub {
       font-size: 17px;
@@ -158,11 +159,7 @@
       line-height: 1.65;
       margin-bottom: 36px;
     }
-    .hero-links {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+    .hero-links { display: flex; gap: 16px; flex-wrap: wrap; }
     .btn {
       display: inline-block;
       padding: 10px 22px;
@@ -171,37 +168,14 @@
       font-weight: 500;
       text-decoration: none;
       transition: all 0.2s;
+      font-family: 'Nunito', sans-serif;
     }
-    .btn-primary {
-      background: var(--teal-dark);
-      color: white;
-    }
+    .btn-primary { background: var(--teal-dark); color: white; }
     .btn-primary:hover { background: #056a55; }
-    .btn-secondary {
-      border: 1.5px solid var(--rule);
-      color: var(--ink);
-      background: transparent;
-    }
+    .btn-secondary { border: 1.5px solid var(--rule); color: var(--ink); background: transparent; }
     .btn-secondary:hover { border-color: var(--ink-light); }
-    .btn-resume {
-      border-color: var(--indigo);
-      color: var(--indigo);
-      background: var(--indigo-light);
-    }
-    .btn-resume:hover { background: #d4d3f5; border-color: var(--indigo); }
-    .btn-linkedin {
-      border-color: var(--blue-soft);
-      color: #2a6fad;
-      background: var(--blue-light);
-    }
-    .btn-linkedin:hover { background: #cde0f5; border-color: var(--blue-soft); }
-    .btn-contact {
-      border-color: var(--teal);
-      color: var(--teal-dark);
-      background: var(--teal-light);
-    }
-    .btn-contact:hover { background: #b8f0e0; border-color: var(--teal); }
 
+    /* SECTIONS */
     section {
       max-width: 1100px;
       margin: 0 auto;
@@ -217,49 +191,13 @@
       margin-bottom: 40px;
     }
 
-    /* ABOUT */
+    /* ABOUT GRID */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 36px;
       align-items: center;
     }
-    .about-photo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-    .photo-frame {
-      width: 180px;
-      height: 220px;
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--rule);
-      background: var(--tag-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .photo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-    .photo-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: var(--ink-faint);
-      font-size: 13px;
-      text-align: center;
-      padding: 16px;
-    }
-    .photo-placeholder svg { opacity: 0.3; }
     .about-bio h2 {
       font-family: 'Nunito', sans-serif;
       font-weight: 700;
@@ -281,11 +219,7 @@
       color: var(--ink-faint);
       margin-bottom: 8px;
     }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag {
       font-size: 13px;
       padding: 4px 11px;
@@ -294,24 +228,12 @@
       color: var(--ink);
       font-family: 'DM Mono', monospace;
     }
-    /* Technical Tools — teal */
-    .tag-group-tools .skill-group-label { color: var(--blue-soft); }
-    .tag-group-tools .tag {
-      background: var(--blue-light);
-      color: #2a6fad;
-    }
-    /* Methods — same */
-    .tag-group-methods .skill-group-label { color: var(--blue-soft); }
-    .tag-group-methods .tag {
-      background: var(--blue-light);
-      color: #2a6fad;
-    }
-    /* Policy Areas — same */
+    .tag-group-tools .skill-group-label,
+    .tag-group-methods .skill-group-label,
     .tag-group-policy .skill-group-label { color: var(--blue-soft); }
-    .tag-group-policy .tag {
-      background: var(--blue-light);
-      color: #2a6fad;
-    }
+    .tag-group-tools .tag,
+    .tag-group-methods .tag,
+    .tag-group-policy .tag { background: var(--blue-light); color: #2a6fad; }
 
     /* EXPERIENCE */
     .exp-list { display: flex; flex-direction: column; gap: 0; }
@@ -324,186 +246,87 @@
     }
     .exp-item:first-child { border-top: 1px solid var(--rule); }
     .exp-meta { padding-top: 2px; }
-    .exp-date {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      color: var(--ink-faint);
-      margin-bottom: 4px;
-    }
-    .exp-org {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--teal-dark);
-    }
-    .exp-title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .exp-desc {
-      font-size: 14px;
-      color: var(--ink-light);
-      line-height: 1.6;
-    }
+    .exp-date { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink-faint); margin-bottom: 4px; }
+    .exp-org { font-size: 13px; font-weight: 600; color: var(--teal-dark); }
+    .exp-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .exp-desc { font-size: 14px; color: var(--ink-light); line-height: 1.6; }
 
-    /* PROJECTS */
-    .projects-list { display: flex; flex-direction: column; gap: 48px; }
-
-    .project-card {
+    /* PROJECT THUMBNAIL CARDS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .project-thumb {
       background: var(--card);
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--rule);
-    }
-    .project-header {
-      padding: 32px 36px 24px;
-      border-bottom: 1px solid var(--rule);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 24px;
-    }
-    .project-number {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--ink-faint);
-      margin-bottom: 8px;
-      letter-spacing: 0.1em;
-    }
-    .project-title {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-    .project-subtitle {
-      font-size: 14px;
-      color: var(--ink-light);
-    }
-    .project-badge {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 12px;
-      border-radius: 3px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-family: 'DM Mono', monospace;
-    }
-    .badge-gis { background: var(--teal-light); color: var(--teal-dark); }
-    .badge-abm { background: var(--purple-light); color: var(--purple); }
-    .badge-tbd { background: var(--blue-light); color: #2a6fad; }
-
-    /* GIS project — teal theme */
-    .project-gis { border-top: 3px solid var(--teal-dark); }
-    .project-gis .project-number { color: var(--teal-dark); }
-    .project-gis .col-label { color: var(--teal-dark); }
-    .project-gis .stat-bar { background: var(--teal-dark); }
-    .project-gis .method-tag { background: var(--blue-light); color: var(--blue-soft); }
-
-    /* ABM project — purple theme */
-    .project-abm { border-top: 3px solid var(--purple); }
-    .project-abm .project-number { color: var(--purple); }
-    .project-abm .col-label { color: var(--purple); }
-    .project-abm .stat-bar { background: var(--purple); }
-    .project-abm .method-tag { background: var(--blue-light); color: var(--blue-soft); }
-
-    .project-body {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      border-bottom: 1px solid var(--rule);
-    }
-    .project-col {
-      padding: 24px 28px;
-      border-right: 1px solid var(--rule);
-    }
-    .project-col:last-child { border-right: none; }
-    .col-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 10px;
-    }
-    .col-text {
-      font-size: 14px;
-      color: var(--ink-light);
-      line-height: 1.6;
-    }
-    .col-text strong { color: var(--ink); font-weight: 600; }
-
-    .project-image {
-      width: 100%;
-      padding: 24px 36px 32px;
-      border-top: 1px solid var(--rule);
-      display: flex;
-      justify-content: center;
-      background: var(--page);
-    }
-    .project-image img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 4px;
-    }
-      padding: 20px 36px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .method-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .method-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      padding: 3px 10px;
-      border-radius: 3px;
-      background: var(--teal-light);
-      color: var(--teal-dark);
-    }
-
-    /* STAT BARS */
-    .stat-row {
+      text-decoration: none;
+      color: var(--ink);
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 8px;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
-    .stat-item { display: flex; flex-direction: column; gap: 4px; }
-    .stat-label { font-size: 12px; color: var(--ink-light); }
-    .stat-bar-wrap {
-      height: 6px;
-      background: var(--rule);
-      border-radius: 3px;
-      overflow: hidden;
+    .project-thumb:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
     }
-    .stat-bar {
-      height: 100%;
-      border-radius: 3px;
-      transition: width 1s ease;
-    }
-    .bar-green { background: var(--green); }
-    .bar-amber { background: var(--amber); }
-    .stat-value { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink-faint); }
-
-    /* COMING SOON CARD */
-    .project-card.coming-soon {
+    .project-thumb.coming-soon {
       border-style: dashed;
       background: transparent;
+      pointer-events: none;
     }
-    .coming-soon-inner {
-      padding: 48px 36px;
-      text-align: center;
+    .thumb-image {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      background: var(--tag-bg);
     }
-    .coming-soon-inner .project-title { color: var(--ink-light); margin-bottom: 8px; }
-    .coming-soon-inner p { color: var(--ink-faint); font-size: 14px; }
+    .thumb-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .project-thumb:hover .thumb-image img { transform: scale(1.03); }
+    .thumb-body { padding: 20px 22px 24px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .thumb-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .thumb-eyebrow-gis { color: var(--teal-dark); }
+    .thumb-eyebrow-abm { color: var(--purple); }
+    .thumb-eyebrow-tbd { color: var(--ink-faint); }
+    .thumb-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.3;
+    }
+    .thumb-summary {
+      font-size: 13px;
+      color: var(--ink-light);
+      line-height: 1.55;
+      flex: 1;
+    }
+    .thumb-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--teal-dark);
+      margin-top: 8px;
+      display: inline-block;
+    }
+    .project-thumb.coming-soon .thumb-body { align-items: center; justify-content: center; text-align: center; }
+    .project-thumb-gis { border-top: 3px solid var(--teal-dark); }
+    .project-thumb-abm { border-top: 3px solid var(--purple); }
 
     /* EDUCATION */
-    .edu-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .edu-card {
       background: var(--card);
       border: 1px solid var(--rule);
@@ -511,61 +334,28 @@
       border-radius: 6px;
       padding: 24px 28px;
     }
-    .edu-degree {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 4px;
-    }
-    .edu-school {
-      font-size: 14px;
-      color: var(--ink-light);
-      margin-bottom: 12px;
-    }
-    .edu-detail {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      color: var(--ink-faint);
-      margin-bottom: 4px;
-    }
+    .edu-degree { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 4px; }
+    .edu-school { font-size: 14px; color: var(--ink-light); margin-bottom: 12px; }
+    .edu-detail { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink-faint); margin-bottom: 4px; }
 
     /* AWARDS */
     .awards-list { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
-    .award-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--ink-light);
-    }
-    .award-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--teal);
-      flex-shrink: 0;
-      margin-top: 8px;
-    }
-    .bar-green { background: var(--teal-dark); }
-    .bar-amber { background: var(--indigo); }
+    .award-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--ink-light); }
+    .award-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 8px; }
 
     /* FOOTER */
     footer {
       border-top: 1px solid var(--rule);
       max-width: 1100px;
       margin: 0 auto;
-      padding: 32px 32px;
+      padding: 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     footer p { font-size: 13px; color: var(--ink-faint); }
     .footer-links { display: flex; gap: 24px; }
-    .footer-links a {
-      font-size: 13px;
-      color: var(--ink-light);
-      text-decoration: none;
-    }
+    .footer-links a { font-size: 13px; color: var(--ink-light); text-decoration: none; }
     .footer-links a:hover { color: var(--ink); }
 
     @media (max-width: 720px) {
@@ -575,9 +365,8 @@
       .hero-about-inner { grid-template-columns: 1fr; gap: 32px; }
       .ha-photo { align-items: center; }
       .ha-photo .photo-frame { width: 160px; min-height: 200px; flex: none; }
-      .about-grid, .project-body, .edu-grid { grid-template-columns: 1fr; }
-      .project-col { border-right: none; border-bottom: 1px solid var(--rule); }
-      .project-col:last-child { border-bottom: none; }
+      .about-grid, .edu-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
       .exp-item { grid-template-columns: 1fr; gap: 4px; }
       footer { flex-direction: column; gap: 16px; text-align: center; }
     }
@@ -585,9 +374,8 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <span class="nav-name">Kai Kibilko</span>
+  <a class="nav-name" href="#about">Kai Kibilko</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -596,10 +384,10 @@
   </ul>
 </nav>
 
-<!-- HERO + ABOUT COMBINED -->
-<div class="hero-about" id="about">
+<a class="back-to-top" href="#about" id="backToTop" aria-label="Back to top">↑</a>
 
-  <!-- top: photo + title side by side -->
+<!-- HERO + ABOUT -->
+<div class="hero-about" id="about">
   <div class="hero-about-inner">
     <div class="ha-photo">
       <div class="photo-frame">
@@ -607,10 +395,10 @@
       </div>
     </div>
     <div class="ha-hero">
-      <p class="hero-eyebrow">Urban Informatics · Energy Policy · Data Analysis</p>
-      <h1>Kai Kibilko<br><em>Emerging Sustainability &amp; Energy Policy Professional</em></h1>
+      <p class="hero-eyebrow">Urban Informatics · Resilience & Resource Management · Data Analysis</p>
+      <h1 class="hero">Kai Kibilko<br><em>Emerging Resilience & Resource Management Professional</em></h1>
       <p class="hero-sub">
-        Graduate student at Northeastern University studying Urban Informatics, with hands-on experience in clean energy and energy efficiency policy, state regulatory research, and community outreach across Massachusetts.
+        Graduate student at Northeastern University studying Urban Informatics, with hands-on experience in resilience and resource management policy, state regulatory research, and community outreach across Massachusetts.
       </p>
       <div class="hero-links">
         <a class="btn btn-primary" href="#projects">View Projects</a>
@@ -621,22 +409,20 @@
     </div>
   </div>
 
-  <!-- divider -->
   <div class="ha-divider"></div>
 
-  <!-- bottom: about + skills full width -->
   <p class="section-label" style="margin-bottom:28px;">Background & Skills</p>
   <div class="about-grid">
     <div class="about-bio">
-      <h2>Translating data into<br>clean energy and<br>policy insight.</h2>
+      <h2>Translating data into<br>resilience and<br>resource insight.</h2>
       <p>
-        I work at the intersection of urban data analysis and clean energy and energy efficiency policy. My background spans state regulatory research, utility rate analysis, program design, and municipal stakeholder engagement across Massachusetts energy agencies and nonprofits.
+        I work at the intersection of urban data analysis and resilience and resource management policy. My background spans state regulatory research, utility rate analysis, program design, and municipal stakeholder engagement across Massachusetts energy agencies and nonprofits.
       </p>
       <p>
-        I'm drawn to questions about equity in the clean energy transition: who gets access to programs, resources, and information, and who doesn't. I believe that rigorous data analysis and on-the-ground policy work are most powerful when they inform each other.
+        I'm drawn to questions about equity in resource transitions: who gets access to programs, resources, and information, and who doesn't. I believe rigorous data analysis and on-the-ground policy work are most powerful when they inform each other.
       </p>
       <p>
-        My experience includes supporting regulatory development at MassDEP, building energy coaching outreach tools across 40+ municipalities, and synthesizing technical information on demand response and grid modernization for state policymakers.
+        My experience includes supporting regulatory development at MassDEP, building program outreach tools across 40+ municipalities, and synthesizing technical information on demand response and grid modernization for state policymakers.
       </p>
     </div>
     <div class="skills-block">
@@ -667,8 +453,8 @@
       <div class="tag-group-policy">
         <p class="skill-group-label">Policy Areas</p>
         <div class="tags">
-          <span class="tag">Clean Heat</span>
-          <span class="tag">Energy Efficiency</span>
+          <span class="tag">Building Resilience</span>
+          <span class="tag">Resource Efficiency</span>
           <span class="tag">Demand Response</span>
           <span class="tag">Grid Modernization</span>
           <span class="tag">Building Electrification</span>
@@ -676,13 +462,12 @@
       </div>
     </div>
   </div>
-
 </div>
+
 <!-- EXPERIENCE -->
 <section id="experience">
   <p class="section-label">Professional Experience</p>
   <div class="exp-list">
-
     <div class="exp-item">
       <div class="exp-meta">
         <p class="exp-date">Jan 2026 – Present</p>
@@ -690,10 +475,9 @@
       </div>
       <div>
         <p class="exp-title">Office of Energy Transformation Fellow</p>
-        <p class="exp-desc">Supporting the Decarbonizing the Peak working group on demand response, battery storage, and grid modernization. Developing statewide CRM tools and leading community outreach across Massachusetts municipalities.</p>
+        <p class="exp-desc">Supporting the Decarbonizing the Peak working group on demand response, battery storage, and grid modernization. Developing statewide CRM tools and supporting community outreach across Massachusetts.</p>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-meta">
         <p class="exp-date">Sep – Dec 2025</p>
@@ -701,10 +485,9 @@
       </div>
       <div>
         <p class="exp-title">Energy Efficiency Intern – Community Solutions</p>
-        <p class="exp-desc">Designed outreach tools to support municipal adoption of energy coaching programs across 40+ Massachusetts communities. Researched federal and state incentives for heat pumps and electrification upgrades.</p>
+        <p class="exp-desc">Designed outreach tools to support municipal adoption of resource efficiency coaching programs across 40+ Massachusetts communities. Researched federal and state incentives for heat pumps and building upgrades.</p>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-meta">
         <p class="exp-date">Jun 2024 – Oct 2024</p>
@@ -712,10 +495,9 @@
       </div>
       <div>
         <p class="exp-title">Intern – Equity in the Clean Heat Standard</p>
-        <p class="exp-desc">Collected and cleaned rate data from nearly 50 regulated energy providers. Analyzed utility rate structures alongside census data to identify geographic and demographic patterns in energy access. Drafted policy briefs for Clean Heat Standard regulatory development.</p>
+        <p class="exp-desc">Collected and cleaned rate data from nearly 50 regulated energy providers. Analyzed utility rate structures alongside census data to identify geographic and demographic patterns in resource access. Drafted policy briefs for Clean Heat Standard regulatory development.</p>
       </div>
     </div>
-
     <div class="exp-item">
       <div class="exp-meta">
         <p class="exp-date">Jun 2023 – Dec 2024</p>
@@ -723,155 +505,40 @@
       </div>
       <div>
         <p class="exp-title">Undergraduate Research Fellow</p>
-        <p class="exp-desc">Co-authored a peer-reviewed publication examining drivers of poor indoor air quality in multi-family housing, connecting weatherization, energy efficiency, and resident health outcomes.</p>
+        <p class="exp-desc">Co-authored a peer-reviewed publication examining drivers of poor indoor air quality in multi-family housing, connecting weatherization, resource efficiency, and resident health outcomes.</p>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
   <p class="section-label">Projects</p>
-  <div class="projects-list">
+  <div class="projects-grid">
 
-    <!-- PROJECT 1: GIS -->
-    <div class="project-card project-gis">
-      <div class="project-header">
-        <div>
-          <p class="project-number">01 · GIS SPATIAL ANALYSIS</p>
-          <h2 class="project-title">Energy Coaching Access<br>in Massachusetts</h2>
-          <p class="project-subtitle">Do wealthier municipalities have more access to clean energy coaching programs?</p>
-        </div>
-        <span class="project-badge badge-gis">ArcGIS · Spatial Analysis</span>
+    <a class="project-thumb project-thumb-gis" href="project-gis.html">
+      <div class="thumb-image">
+        <img src="heatpumpcoaching.png" alt="Energy coaching access map across Massachusetts municipalities" />
       </div>
+      <div class="thumb-body">
+        <p class="thumb-eyebrow thumb-eyebrow-gis">GIS Spatial Analysis</p>
+        <p class="thumb-title">Resource Coaching Access in Massachusetts</p>
+        <p class="thumb-summary">Mapping equity gaps in heat pump coaching program availability across all 351 Massachusetts municipalities using spatial analysis and income data.</p>
+        <span class="thumb-link">Read the brief →</span>
+      </div>
+    </a>
 
-      <div class="project-body">
-        <div class="project-col">
-          <p class="col-label">The Problem</p>
-          <p class="col-text">
-            Energy coaching programs that help residents understand and upgrade home heating systems are unevenly distributed across Massachusetts. <strong>Only 62 of 351 municipalities have coaching</strong>, covering just 39% of the state's population. The question: is access correlated with income?
-          </p>
-        </div>
-        <div class="project-col">
-          <p class="col-label">Methods Used</p>
-          <p class="col-text">
-            Combined NEEP coaching data with MassDOR income data and MassGIS municipal boundaries. Used <strong>spatial joins, summary statistics, histogram analysis, and hotspot analysis</strong> in ArcGIS to compare income and population distributions between coaching and non-coaching municipalities.
-          </p>
-          <div class="stat-row" style="margin-top:16px;">
-            <div class="stat-item">
-              <div style="display:flex;justify-content:space-between;"><span class="stat-label">Median income, with coaching</span><span class="stat-value">$79,905</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar" style="width:79%"></div></div>
-            </div>
-            <div class="stat-item">
-              <div style="display:flex;justify-content:space-between;"><span class="stat-label">Median income, without coaching</span><span class="stat-value">$45,421</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar" style="width:45%"></div></div>
-            </div>
-            <div class="stat-item">
-              <div style="display:flex;justify-content:space-between;"><span class="stat-label">Statewide median income</span><span class="stat-value">$47,294</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar" style="width:47%"></div></div>
-            </div>
-          </div>
-        </div>
-        <div class="project-col">
-          <p class="col-label">Policy Implications</p>
-          <p class="col-text">
-            Coaching is concentrated in affluent, densely populated suburbs, particularly <strong>MetroWest and North Shore</strong>, while lower-income communities with the highest need go underserved. Recommendations include expanding the MEM Grant model to fund regional coaching programs, grouping smaller municipalities to create sufficient demand, and providing implementation toolkits to communities without resources to build programs independently.
-          </p>
-        </div>
+    <a class="project-thumb project-thumb-abm" href="project-abm.html">
+      <div class="thumb-image">
+        <img src="urbanheat.png" alt="Urban heat island agent-based model" />
       </div>
-
-      <div class="project-footer">
-        <div class="method-tags">
-          <span class="method-tag">ArcGIS</span>
-          <span class="method-tag">Spatial Join</span>
-          <span class="method-tag">Hotspot Analysis</span>
-          <span class="method-tag">Summary Statistics</span>
-          <span class="method-tag">Excel</span>
-        </div>
-        <a class="btn btn-secondary" href="Final-Report-GIS-KaiKibilko-1.pdf" target="_blank" style="font-size:13px;">Full Report →</a>
+      <div class="thumb-body">
+        <p class="thumb-eyebrow thumb-eyebrow-abm">Agent-Based Modeling</p>
+        <p class="thumb-title">Simulating Urban Heat Island Dynamics</p>
+        <p class="thumb-summary">Using an agent-based model in NetLogo to explore how land cover quantity and spatial arrangement drive heat patterns in urban environments.</p>
+        <span class="thumb-link">Read the brief →</span>
       </div>
-
-      <div class="project-image">
-        <figure style="text-align:center; margin:0;">
-          <img src="heatpumpcoaching.png" alt="Energy coaching access map across Massachusetts municipalities" />
-          <figcaption style="margin-top:10px; font-size:13px; color:var(--ink-faint); font-family:'DM Mono',monospace; letter-spacing:0.04em;">Areas with and without heat pump coaching available in Massachusetts</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <!-- PROJECT 2: ABM -->
-    <div class="project-card project-abm">
-      <div class="project-header">
-        <div>
-          <p class="project-number">02 · AGENT-BASED MODELING</p>
-          <p class="project-subtitle">How do spatial distributions of land cover types affect heat in urban environments?</p>
-        </div>
-        <span class="project-badge badge-abm">NetLogo · ABM</span>
-      </div>
-
-      <div class="project-body">
-        <div class="project-col">
-          <p class="col-label">The Problem</p>
-          <p class="col-text">
-            Urban heat islands (UHIs) emerge from complex interactions between impervious surfaces, vegetation, and spatial layout, but these dynamics are expensive and difficult to measure directly. The question: <strong>how do the quantity and spatial arrangement of land covers shape heat patterns</strong> in an urban environment?
-          </p>
-        </div>
-        <div class="project-col">
-          <p class="col-label">Methods Used</p>
-          <p class="col-text">
-            Built an <strong>agent-based model in NetLogo</strong> simulating concrete patches, grass patches, and tree agents with calibrated heat inflow, outflow, and diffusion rates. Ran scenario testing across concrete quantity (25/50/75%), tree count (0/10/20), tree radius (1/3/5), and clustering (0/5/10) with 30 runs each to isolate the effect of each variable on mean temperatures.
-          </p>
-          <div class="stat-row" style="margin-top:16px;">
-            <div class="stat-item">
-              <div style="display:flex;justify-content:space-between;"><span class="stat-label">25% concrete, overall mean temp</span><span class="stat-value">83.3°F</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar" style="width:40%"></div></div>
-            </div>
-            <div class="stat-item">
-              <div style="display:flex;justify-content:space-between;"><span class="stat-label">75% concrete, overall mean temp</span><span class="stat-value">95.8°F</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar" style="width:70%"></div></div>
-            </div>
-            <div class="stat-item">
-              <div style="display:flex;justify-content:space-between;"><span class="stat-label">Temp reduction, 0 to 20 trees</span><span class="stat-value">−2.7°F</span></div>
-              <div class="stat-bar-wrap"><div class="stat-bar" style="width:30%"></div></div>
-            </div>
-          </div>
-        </div>
-        <div class="project-col">
-          <p class="col-label">Policy Implications</p>
-          <p class="col-text">
-            The most striking finding: <strong>when concrete and grass are interleaved rather than segregated</strong>, concrete temperatures drop meaningfully, suggesting mixed land cover is more effective than isolated green space. Recommendations include greening transit corridors (e.g. grass beneath Green Line tracks, as in European streetcar systems), and using stormwater management infrastructure to replace impervious surfaces with vegetation in targeted areas.
-          </p>
-        </div>
-      </div>
-
-      <div class="project-footer">
-        <div class="method-tags">
-          <span class="method-tag">NetLogo</span>
-          <span class="method-tag">Agent-Based Modeling</span>
-          <span class="method-tag">Scenario Testing</span>
-          <span class="method-tag">Sensitivity Analysis</span>
-          <span class="method-tag">Parameterization</span>
-        </div>
-        <a class="btn btn-secondary" href="Final-ABM-Report.pdf" target="_blank" style="font-size:13px;">Full Report →</a>
-      </div>
-
-      <div class="project-image">
-        <figure style="text-align:center; margin:0;">
-          <img src="urbanheat.png" alt="Urban heat island simulation showing temperature distribution across land cover types" />
-          <figcaption style="margin-top:10px; font-size:13px; color:var(--ink-faint); font-family:'DM Mono',monospace; letter-spacing:0.04em;">The NetLogo model environment before simulation, showing the initial layout of concrete, grass, and tree agents</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <!-- PROJECT 3: COMING SOON -->
-    <div class="project-card coming-soon">
-      <div class="coming-soon-inner">
-        <p class="project-number" style="text-align:center; margin-bottom:12px;">03 · IN PROGRESS</p>
-        <h2 class="project-title">Project Three</h2>
-        <p>Coming soon, check back later.</p>
-      </div>
-    </div>
+    </a>
 
   </div>
 </section>
@@ -898,33 +565,20 @@
   <div style="margin-top: 36px;">
     <p class="skill-group-label" style="margin-bottom:16px;">Awards & Fellowships</p>
     <div class="awards-list">
-      <div class="award-item">
-        <span class="award-dot"></span>
-        <span>Office of Energy Transformation Fellowship</span>
-      </div>
-      <div class="award-item">
-        <span class="award-dot"></span>
-        <span>Eli J. & Phyllis N. Segal Citizen Leadership Program</span>
-      </div>
-      <div class="award-item">
-        <span class="award-dot"></span>
-        <span>Health Effects Institute Environmental Health Fellowship</span>
-      </div>
+      <div class="award-item"><span class="award-dot"></span><span>Office of Energy Transformation Fellowship</span></div>
+      <div class="award-item"><span class="award-dot"></span><span>Eli J. & Phyllis N. Segal Citizen Leadership Program</span></div>
+      <div class="award-item"><span class="award-dot"></span><span>Health Effects Institute Environmental Health Fellowship</span></div>
     </div>
   </div>
 
   <div style="margin-top: 28px;">
     <p class="skill-group-label" style="margin-bottom:16px;">Publications</p>
     <div class="awards-list">
-      <div class="award-item">
-        <span class="award-dot"></span>
-        <span>Co-author, peer-reviewed publication on indoor air quality in multi-family housing, Boston University School of Public Health</span>
-      </div>
+      <div class="award-item"><span class="award-dot"></span><span>Co-author, peer-reviewed publication on indoor air quality in multi-family housing, Boston University School of Public Health</span></div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2026 Kai Kibilko</p>
   <div class="footer-links">
@@ -933,6 +587,13 @@
     <a href="tel:6179918024">617-991-8024</a>
   </div>
 </footer>
+
+<script>
+  const btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  });
+</script>
 
 </body>
 </html>
