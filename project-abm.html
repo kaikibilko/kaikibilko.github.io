@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urban Heat Island Dynamics | Kai Kibilko</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --ink-light: #5a5a5a;
+      --ink-faint: #9a9a9a;
+      --page: #f7f5f0;
+      --card: #ffffff;
+      --rule: #e0ddd7;
+      --purple: #3D1A78;
+      --purple-light: #ece5f5;
+      --blue-soft: #7BADE2;
+      --blue-light: #ddeaf9;
+      --teal-dark: #078D70;
+      --teal-light: #d0f5ec;
+      --tag-bg: #efefef;
+      --accent: var(--purple);
+      --accent-light: var(--purple-light);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--page);
+      color: var(--ink);
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--page);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 32px;
+      height: 56px;
+    }
+    .nav-name {
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-light);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-back:hover { color: var(--purple); }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      background: var(--purple);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 200;
+      text-decoration: none;
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: all; }
+    .back-to-top:hover { background: #2e1259; }
+
+    .brief-header {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 64px 32px 48px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .brief-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .brief-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .brief-subtitle {
+      font-size: 18px;
+      color: var(--ink-light);
+      line-height: 1.6;
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+    .brief-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 3px; }
+    .meta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .meta-value { font-size: 14px; font-weight: 600; color: var(--ink); }
+
+    .brief-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 56px 32px 80px;
+    }
+    .brief-section { margin-bottom: 56px; }
+    .brief-section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brief-section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+    .brief-section h2 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .brief-section p {
+      font-size: 15px;
+      color: var(--ink-light);
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+    .brief-section p:last-child { margin-bottom: 0; }
+
+    .callout {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+    .callout p { font-size: 15px; color: var(--ink); margin: 0; line-height: 1.6; }
+    .callout strong { color: var(--accent); }
+
+    .stat-trio {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .stat-box {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 20px 20px 16px;
+    }
+    .stat-box .stat-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .stat-box .stat-desc { font-size: 13px; color: var(--ink-light); line-height: 1.4; }
+
+    /* SCENARIO TABLE */
+    .scenario-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 24px 0;
+    }
+    .scenario-table th {
+      text-align: left;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--rule);
+    }
+    .scenario-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink-light);
+    }
+    .scenario-table td:first-child { font-weight: 600; color: var(--ink); }
+    .scenario-table tr:last-child td { border-bottom: none; }
+
+    .brief-image { margin: 32px 0; text-align: center; }
+    .brief-image img { max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--rule); }
+    .brief-image figcaption {
+      margin-top: 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-faint);
+      letter-spacing: 0.03em;
+    }
+
+    .rec-list { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+    .rec-item { display: flex; gap: 16px; align-items: flex-start; }
+    .rec-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-light);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .rec-text { font-size: 15px; color: var(--ink-light); line-height: 1.65; }
+    .rec-text strong { color: var(--ink); }
+
+    .method-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .method-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 3px;
+      background: var(--blue-light);
+      color: var(--blue-soft);
+    }
+
+    .brief-nav {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 32px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: 'Nunito', sans-serif;
+    }
+    .btn-primary { background: var(--purple); color: white; }
+    .btn-primary:hover { background: #2e1259; }
+    .btn-secondary { border: 1.5px solid var(--rule); color: var(--ink); background: transparent; }
+    .btn-secondary:hover { border-color: var(--ink-light); }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 13px; color: var(--ink-faint); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--ink-light); text-decoration: none; }
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 720px) {
+      .brief-header, .brief-body, .brief-nav, footer { padding-left: 24px; padding-right: 24px; }
+      .stat-trio { grid-template-columns: 1fr; }
+      .brief-meta { gap: 20px; }
+      nav { padding: 0 24px; }
+      .brief-nav { flex-direction: column; gap: 16px; }
+      .scenario-table { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="index.html">Kai Kibilko</a>
+  <a class="nav-back" href="index.html">← Back to portfolio</a>
+</nav>
+
+<a class="back-to-top" href="#" id="backToTop" aria-label="Back to top">↑</a>
+
+<div class="brief-header">
+  <p class="brief-eyebrow">Policy Brief · Agent-Based Modeling</p>
+  <h1 class="brief-title">Simulating Urban Heat<br>Island Dynamics</h1>
+  <p class="brief-subtitle">Using agent-based modeling to explore how land cover quantity and spatial arrangement drive heat patterns in urban environments, and what that means for city planning and resilience.</p>
+  <div class="brief-meta">
+    <div class="meta-item">
+      <span class="meta-label">Methods</span>
+      <span class="meta-value">NetLogo ABM, Scenario Testing</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Co-authors</span>
+      <span class="meta-value">Amukta, Kai, Sam</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Scenarios Run</span>
+      <span class="meta-value">30 runs per scenario</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Full Report</span>
+      <span class="meta-value"><a href="Final-ABM-Report.pdf" target="_blank" style="color:var(--purple);">Download PDF →</a></span>
+    </div>
+  </div>
+</div>
+
+<div class="brief-body">
+
+  <div class="brief-section">
+    <p class="brief-section-label">Background</p>
+    <h2>The Problem</h2>
+    <p>
+      Urban heat islands (UHIs) are one of the most well-documented consequences of urbanization. Cities are systematically warmer than surrounding rural areas, sometimes by more than 10 degrees Fahrenheit, because of the concentration of heat-absorbing surfaces like concrete and asphalt, the loss of tree cover and vegetation, and the dense geometry of buildings that traps heat and blocks wind.
+    </p>
+    <p>
+      The consequences are serious. Extreme urban heat contributes to heat exhaustion, respiratory distress, and preventable death, disproportionately affecting communities including elderly residents, children, and low-income communities that lack air conditioning and green space. Urban heat also creates a damaging feedback loop: higher temperatures drive greater air conditioning use, which increases energy consumption and emissions that further warm the environment.
+    </p>
+    <p>
+      Understanding how to reduce urban heat requires understanding not just what materials a city is made of, but how those materials are arranged relative to each other. That spatial dimension is difficult and expensive to measure in the real world, which is where simulation becomes a useful tool for planners and policymakers.
+    </p>
+
+    <div class="callout">
+      <p><strong>Research Question:</strong> How do different spatial distributions and quantities of land cover types affect heat interactions in an urban environment?</p>
+    </div>
+  </div>
+
+  <div class="brief-section">
+    <p class="brief-section-label">Model Design</p>
+    <h2>How the Model Works</h2>
+    <p>
+      We built an agent-based model in NetLogo that simulates a simplified urban environment. The model contains two land cover types, concrete and grass, and tree agents that can be placed strategically or randomly across grass patches. Each patch has a temperature that updates every tick (representing one hour), driven by heat inflow from a simulated daily temperature curve, outflow rates that vary by land cover, and diffusion to neighboring patches.
+    </p>
+    <p>
+      The model was calibrated against empirical research on surface temperatures. Concrete patches run significantly hotter than peak air temperature; grass patches run slightly cooler; and patches within a tree's shading radius receive reduced inflow and amplified cooling. This allowed us to test how changing quantities, arrangements, and tree placements affected mean temperatures across the full model environment.
+    </p>
+
+    <figure class="brief-image">
+      <img src="urbanheat.png" alt="NetLogo model environment before simulation" />
+      <figcaption>The NetLogo model environment before simulation, showing the initial layout of concrete, grass, and tree agents</figcaption>
+    </figure>
+
+    <figure class="brief-image">
+      <img src="ConceptualDiagram.png" alt="Conceptual model diagram showing how patches, globals, inflow, outflow, and diffusion interact" />
+      <figcaption>Conceptual model diagram showing how patches, global variables, and temperature inflow and outflow interact each tick</figcaption>
+    </figure>
+
+    <div class="method-tags">
+      <span class="method-tag">NetLogo</span>
+      <span class="method-tag">Agent-Based Modeling</span>
+      <span class="method-tag">Scenario Testing</span>
+      <span class="method-tag">Sensitivity Analysis</span>
+      <span class="method-tag">Parameterization</span>
+    </div>
+  </div>
+
+  <div class="brief-section">
+    <p class="brief-section-label">Key Findings</p>
+    <h2>What the Scenarios Revealed</h2>
+
+    <div class="stat-trio">
+      <div class="stat-box">
+        <span class="stat-number">+12.4°F</span>
+        <span class="stat-desc">overall temperature increase when concrete coverage rises from 25% to 75%</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">−2.7°F</span>
+        <span class="stat-desc">temperature reduction from adding 20 trees versus none</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">~5°F</span>
+        <span class="stat-desc">concrete temperature reduction when land covers are mixed rather than segregated</span>
+      </div>
+    </div>
+
+    <p>
+      Scenario testing covered four variables: concrete quantity, tree count, tree radius, and land cover clustering. The results confirmed expected findings on quantity and tree cover. More concrete means higher temperatures; more trees means lower temperatures. The most policy-relevant finding, however, came from the clustering scenarios.
+    </p>
+
+    <table class="scenario-table">
+      <thead>
+        <tr>
+          <th>Clustering Level</th>
+          <th>Overall Mean Temp</th>
+          <th>Grass Mean</th>
+          <th>Concrete Mean</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>0 (fully mixed)</td><td>89.4°F</td><td>79.3°F</td><td>99.5°F</td></tr>
+        <tr><td>5 (moderate)</td><td>89.5°F</td><td>77.1°F</td><td>101.9°F</td></tr>
+        <tr><td>10 (highly clustered)</td><td>89.6°F</td><td>76.9°F</td><td>102.2°F</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      When concrete and grass are fully interleaved, concrete temperatures are meaningfully lower than when the two land covers are segregated into separate zones. The cooling effect of nearby grass patches extends into adjacent concrete through heat diffusion, an effect that disappears when the two materials are separated. The overall mean temperature changes little, but the concrete surface temperature, the primary driver of dangerous urban heat, drops by several degrees when land covers are mixed.
+    </p>
+
+    <figure class="brief-image">
+      <img src="ClusteringScenarios.png" alt="Bar chart showing mean temperatures by patch type across clustering scenarios" />
+      <figcaption>Mean temperatures by patch type across all clustering scenarios — as clustering increases, concrete temps rise while grass temps fall, with little change in the overall mean</figcaption>
+    </figure>
+  </div>
+
+  <div class="brief-section">
+    <p class="brief-section-label">Policy Implications</p>
+    <h2>Recommendations for Urban Planners</h2>
+    <p>
+      The simulation suggests that land cover configuration matters as much as quantity, and potentially more than the simple addition of green space in isolated patches. Two recommendations follow directly from the findings:
+    </p>
+
+    <div class="rec-list">
+      <div class="rec-item">
+        <span class="rec-num">1</span>
+        <p class="rec-text"><strong>Integrate vegetation into existing paved infrastructure rather than concentrating it in isolated green zones.</strong> The clustering findings suggest that grass and trees dispersed throughout a neighborhood, including planting strips, median greenery, and roadside plantings, are more effective at reducing dangerous surface temperatures than equivalent vegetation concentrated in a park or plaza. In Boston, this points to opportunities along transit corridors: sections of the Green Line that run between surface lanes could follow the European streetcar model of grass-lined tracks, introducing vegetation directly into a high-heat corridor.</p>
+      </div>
+      <div class="rec-item">
+        <span class="rec-num">2</span>
+        <p class="rec-text"><strong>Use stormwater management investment as a heat mitigation tool.</strong> Effective stormwater management often involves replacing impervious surface with permeable materials and plantings such as bioswales, rain gardens, and permeable pavement strips. These interventions directly reduce concrete coverage while dispersing vegetation throughout the urban fabric in precisely the interleaved pattern the model identifies as most effective for heat reduction. Cities and towns applying for stormwater infrastructure funding should be encouraged to consider co-benefits for urban heat resilience in their project designs.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-section">
+    <p class="brief-section-label">Limitations & Next Steps</p>
+    <h2>Where the Model Falls Short</h2>
+    <p>
+      The model simplifies the urban environment considerably. It excludes building height and geometry, vehicular heat, air conditioning exhaust, and the behavioral responses of residents to extreme heat, all of which matter in real cities. The strategic tree placement mechanism also limited how much shading reached concrete patches directly, which likely understated the cooling effect of well-positioned trees on high-heat surfaces.
+    </p>
+    <p>
+      Future extensions could incorporate social behavior by modeling how residents respond to extreme heat events, and allow dynamic tree growth to simulate long-term canopy development. The model's generalizable temperature parameters also make it adaptable to other cities and climates, opening possibilities for comparative analysis across different urban contexts.
+    </p>
+  </div>
+
+</div>
+
+<div class="brief-nav">
+  <a class="btn btn-secondary" href="index.html">← Back to portfolio</a>
+  <a class="btn btn-primary" href="Final-ABM-Report.pdf" target="_blank">Download full report</a>
+</div>
+
+<footer>
+  <p>© 2026 Kai Kibilko</p>
+  <div class="footer-links">
+    <a href="mailto:kaikibilko345@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/kaikibilko/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  });
+</script>
+
+</body>
+</html>

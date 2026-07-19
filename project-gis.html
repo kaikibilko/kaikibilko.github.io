@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resource Coaching Access in Massachusetts | Kai Kibilko</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --ink-light: #5a5a5a;
+      --ink-faint: #9a9a9a;
+      --page: #f7f5f0;
+      --card: #ffffff;
+      --rule: #e0ddd7;
+      --teal-dark: #078D70;
+      --teal: #26CEAA;
+      --teal-light: #d0f5ec;
+      --blue-soft: #7BADE2;
+      --blue-light: #ddeaf9;
+      --tag-bg: #efefef;
+      --accent: var(--teal-dark);
+      --accent-light: var(--teal-light);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--page);
+      color: var(--ink);
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--page);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 32px;
+      height: 56px;
+    }
+    .nav-name {
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-light);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-back:hover { color: var(--teal-dark); }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      background: var(--teal-dark);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 200;
+      text-decoration: none;
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: all; }
+    .back-to-top:hover { background: #056a55; }
+
+    /* BRIEF HEADER */
+    .brief-header {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 64px 32px 48px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .brief-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .brief-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .brief-subtitle {
+      font-size: 18px;
+      color: var(--ink-light);
+      line-height: 1.6;
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+    .brief-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 3px; }
+    .meta-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .meta-value { font-size: 14px; font-weight: 600; color: var(--ink); }
+
+    /* BRIEF BODY */
+    .brief-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 56px 32px 80px;
+    }
+    .brief-section { margin-bottom: 56px; }
+    .brief-section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brief-section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+    .brief-section h2 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .brief-section p {
+      font-size: 15px;
+      color: var(--ink-light);
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+    .brief-section p:last-child { margin-bottom: 0; }
+
+    /* CALLOUT BOX */
+    .callout {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+    .callout p {
+      font-size: 15px;
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .callout strong { color: var(--accent); }
+
+    /* STAT ROW */
+    .stat-trio {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .stat-box {
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 20px 20px 16px;
+    }
+    .stat-box .stat-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .stat-box .stat-desc {
+      font-size: 13px;
+      color: var(--ink-light);
+      line-height: 1.4;
+    }
+
+    /* IMAGE */
+    .brief-image {
+      margin: 32px 0;
+      text-align: center;
+    }
+    .brief-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+    }
+    .brief-image figcaption {
+      margin-top: 10px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-faint);
+      letter-spacing: 0.03em;
+    }
+
+    /* RECOMMENDATIONS */
+    .rec-list { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+    .rec-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .rec-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-light);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .rec-text { font-size: 15px; color: var(--ink-light); line-height: 1.65; }
+    .rec-text strong { color: var(--ink); }
+
+    /* METHOD TAGS */
+    .method-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .method-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 3px;
+      background: var(--blue-light);
+      color: var(--blue-soft);
+    }
+
+    /* BOTTOM NAV */
+    .brief-nav {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 32px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: 'Nunito', sans-serif;
+    }
+    .btn-primary { background: var(--teal-dark); color: white; }
+    .btn-primary:hover { background: #056a55; }
+    .btn-secondary { border: 1.5px solid var(--rule); color: var(--ink); background: transparent; }
+    .btn-secondary:hover { border-color: var(--ink-light); }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p { font-size: 13px; color: var(--ink-faint); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--ink-light); text-decoration: none; }
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 720px) {
+      .brief-header, .brief-body, .brief-nav, footer { padding-left: 24px; padding-right: 24px; }
+      .stat-trio { grid-template-columns: 1fr; }
+      .brief-meta { gap: 20px; }
+      nav { padding: 0 24px; }
+      .brief-nav { flex-direction: column; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="index.html">Kai Kibilko</a>
+  <a class="nav-back" href="index.html">← Back to portfolio</a>
+</nav>
+
+<a class="back-to-top" href="#" id="backToTop" aria-label="Back to top">↑</a>
+
+<!-- HEADER -->
+<div class="brief-header">
+  <p class="brief-eyebrow">Policy Brief · GIS Spatial Analysis</p>
+  <h1 class="brief-title">Resource Coaching Access<br>in Massachusetts</h1>
+  <p class="brief-subtitle">A spatial analysis of equity gaps in heat pump coaching program availability across all 351 Massachusetts municipalities.</p>
+  <div class="brief-meta">
+    <div class="meta-item">
+      <span class="meta-label">Methods</span>
+      <span class="meta-value">ArcGIS, Spatial Join, Hotspot Analysis</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Data Sources</span>
+      <span class="meta-value">NEEP, MassDOR, MassGIS</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Scope</span>
+      <span class="meta-value">351 Massachusetts municipalities</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Full Report</span>
+      <span class="meta-value"><a href="Final-Report-GIS-KaiKibilko-1.pdf" target="_blank" style="color:var(--teal-dark);">Download PDF →</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="brief-body">
+
+  <div class="brief-section">
+    <p class="brief-section-label">Background</p>
+    <h2>The Problem</h2>
+    <p>
+      Energy coaching programs connect residents with guidance on upgrading home heating and cooling systems, particularly heat pumps, a core technology in Massachusetts's building decarbonization strategy. These programs are intended to help residents navigate the complexity of available incentives, utility rebates, and contractor options, lowering barriers to adoption for households that need it most.
+    </p>
+    <p>
+      However, coaching is not uniformly available across the Commonwealth. Access depends largely on whether a municipality has chosen to establish or participate in a coaching program, creating a patchwork of coverage that may reflect existing disparities in municipal capacity and resources rather than resident need.
+    </p>
+
+    <div class="callout">
+      <p><strong>Research Question:</strong> How do the median incomes of municipalities with energy coaching programs differ from those without, and what does that mean for equitable resource access?</p>
+    </div>
+  </div>
+
+  <div class="brief-section">
+    <p class="brief-section-label">Key Findings</p>
+    <h2>Who Has Access: and Who Doesn't</h2>
+
+    <div class="stat-trio">
+      <div class="stat-box">
+        <span class="stat-number">62</span>
+        <span class="stat-desc">of 351 municipalities have coaching available: just 17.7%</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">39%</span>
+        <span class="stat-desc">of Massachusetts residents live in a municipality with coaching</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">$34K</span>
+        <span class="stat-desc">median income gap between coaching and non-coaching municipalities</span>
+      </div>
+    </div>
+
+    <p>
+      Municipalities with coaching programs have a median per capita income of $79,905, compared to $45,421 for those without. The statewide median is $47,294, meaning non-coaching municipalities are roughly in line with the state average, while coaching municipalities are far above it. This pattern suggests that coaching programs have, to date, proliferated in communities that already have greater financial resources and municipal capacity, rather than in the communities where residents face the highest energy cost burdens.
+    </p>
+
+    <figure class="brief-image">
+      <img src="CoachingMA.png" alt="Median income per capita by municipality, comparing coaching and non-coaching areas across Massachusetts" />
+      <figcaption>Median income per capita across Massachusetts municipalities, by coaching program availability</figcaption>
+    </figure>
+
+    <p>
+      Geographically, coaching municipalities cluster in the MetroWest region and the coastal North Shore, known as affluent suburbs east of Worcester and north of Boston. Western Massachusetts, the South Shore, and the Cape are largely without coverage despite significant populations and meaningful energy burden challenges.
+    </p>
+
+    <figure class="brief-image">
+      <img src="heatpumpcoaching.png" alt="Map showing areas with and without heat pump coaching across Massachusetts municipalities" />
+      <figcaption>Areas with and without heat pump coaching available across Massachusetts municipalities</figcaption>
+    </figure>
+
+    <p>
+      A secondary analysis examined population size. Coaching municipalities have a median population of 24,463 residents, compared to 9,049 for non-coaching municipalities: more than 2.5 times larger. This suggests that program implementation may be driven partly by municipal capacity: larger communities have more staff, resources, and administrative bandwidth to establish and sustain coaching programs.
+    </p>
+  </div>
+
+  <div class="brief-section">
+    <p class="brief-section-label">Methods</p>
+    <h2>Analytical Approach</h2>
+    <p>
+      This analysis combined three datasets: energy coaching program availability data from NEEP, per capita income and population data from the Massachusetts Department of Revenue, and municipal boundary shapefiles from MassGIS. After data cleaning and standardization, a spatial join was performed in ArcGIS to connect income and population attributes to municipal boundaries. Summary statistics and histogram tools were used to calculate and compare median income distributions between coaching and non-coaching municipalities. A hotspot analysis on population (excluding Boston as an outlier) was conducted to understand the geographic concentration of larger municipalities and its relationship to coaching availability.
+    </p>
+    <div class="method-tags">
+      <span class="method-tag">ArcGIS</span>
+      <span class="method-tag">Spatial Join</span>
+      <span class="method-tag">Hotspot Analysis</span>
+      <span class="method-tag">Summary Statistics</span>
+      <span class="method-tag">Histogram Analysis</span>
+      <span class="method-tag">Excel</span>
+    </div>
+  </div>
+
+  <div class="brief-section">
+    <p class="brief-section-label">Policy Implications</p>
+    <h2>Recommendations</h2>
+    <p>
+      The findings point to a structural gap: the communities that would benefit most from coaching support are the least likely to have it. Closing this gap will require deliberate policy intervention rather than organic program growth. Three recommendations emerge from this analysis:
+    </p>
+
+    <div class="rec-list">
+      <div class="rec-item">
+        <span class="rec-num">1</span>
+        <p class="rec-text"><strong>Expand the Municipal Energy Manager Grant model.</strong> The MEM Grant has successfully placed energy managers in municipalities and regional planning commissions to drive efficiency program adoption. A similar grant targeting coaching program implementation: with explicit focus on lower-income and smaller communities: could bridge the capacity gap. Regional planning commissions could serve as program hosts for clusters of smaller municipalities, aggregating demand across towns that individually lack the population to justify a standalone program.</p>
+      </div>
+      <div class="rec-item">
+        <span class="rec-num">2</span>
+        <p class="rec-text"><strong>Develop regional coaching models for smaller municipalities.</strong> The MEM Grant already uses a regional model: some energy managers cover multiple municipalities through regional planning commissions. Coaching programs could use the same structure, grouping towns with populations under 10,000 into regional cohorts. A combined population of four to six towns would rival coaching municipalities in demand while sharing program administration costs.</p>
+      </div>
+      <div class="rec-item">
+        <span class="rec-num">3</span>
+        <p class="rec-text"><strong>Provide implementation toolkits alongside funding.</strong> Municipalities without coaching often lack not just resources but knowledge of how to build a program. MassSave and state partners should develop accessible, replicable implementation guides drawn from the experience of established programs in communities like Acton, Concord, and Needham, to lower the knowledge barrier alongside the financial one.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="brief-section">
+    <p class="brief-section-label">Limitations & Next Steps</p>
+    <h2>What This Analysis Doesn't Capture</h2>
+    <p>
+      The coaching data used in this analysis reflects program availability as of August 2025 and does not distinguish between municipally administered programs and those run by nonprofits. Anecdotal evidence suggests municipal programs tend to achieve higher resident engagement, a distinction worth exploring empirically. Future work should also examine coaching program outcomes to identify what structural features predict success, and compare Massachusetts programs to those in other NEEP-region states where coaching infrastructure is less developed.
+    </p>
+  </div>
+
+</div>
+
+<div class="brief-nav">
+  <a class="btn btn-secondary" href="index.html">← Back to portfolio</a>
+  <a class="btn btn-primary" href="Final-Report-GIS-KaiKibilko-1.pdf" target="_blank">Download full report</a>
+</div>
+
+<footer>
+  <p>© 2026 Kai Kibilko</p>
+  <div class="footer-links">
+    <a href="mailto:kaikibilko345@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/kaikibilko/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  });
+</script>
+
+</body>
+</html>
