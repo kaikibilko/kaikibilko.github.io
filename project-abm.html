@@ -238,6 +238,35 @@
       letter-spacing: 0.03em;
     }
 
+    .landscape-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 32px 0;
+    }
+    .landscape-card { text-align: center; }
+    .landscape-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid var(--rule);
+      display: block;
+    }
+    .landscape-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 10px;
+      padding: 3px 10px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    @media (max-width: 720px) {
+      .landscape-trio { grid-template-columns: 1fr; }
+    }
+
     .rec-list { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
     .rec-item { display: flex; gap: 16px; align-items: flex-start; }
     .rec-num {
@@ -335,11 +364,7 @@
     </div>
     <div class="meta-item">
       <span class="meta-label">Co-authors</span>
-      <span class="meta-value">Amukta, Kai, Sam</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Scenarios Run</span>
-      <span class="meta-value">30 runs per scenario</span>
+      <span class="meta-value">Amukta, Sam</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Full Report</span>
@@ -450,21 +475,21 @@
       When concrete and grass are fully interleaved, concrete temperatures are meaningfully lower than when the two land covers are segregated into separate zones. The cooling effect of nearby grass patches extends into adjacent concrete through heat diffusion, an effect that disappears when the two materials are separated. The overall mean temperature changes little, but the concrete surface temperature, the primary driver of dangerous urban heat, drops by several degrees when land covers are mixed.
     </p>
 
-    <figure class="brief-image">
-      <img src="ClusteringScenarios.png" alt="Bar chart showing mean temperatures by patch type across clustering scenarios" />
-      <div style="display:flex; gap:20px; justify-content:center; margin-top:10px; flex-wrap:wrap;">
-        <span style="display:flex; align-items:center; gap:6px; font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-faint);">
-          <span style="width:12px; height:12px; border-radius:2px; background:#78206e; flex-shrink:0;"></span>Overall
-        </span>
-        <span style="display:flex; align-items:center; gap:6px; font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-faint);">
-          <span style="width:12px; height:12px; border-radius:2px; background:#13501b; flex-shrink:0;"></span>Grass
-        </span>
-        <span style="display:flex; align-items:center; gap:6px; font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-faint);">
-          <span style="width:12px; height:12px; border-radius:2px; background:#7f7f7f; flex-shrink:0;"></span>Concrete
-        </span>
+    <div class="landscape-trio">
+      <div class="landscape-card">
+        <img src="0clustering.png" alt="Model landscape at clustering level 0, fully mixed concrete and grass" />
+        <span class="landscape-label" style="background:var(--teal-light); color:var(--teal-dark);">Fully Mixed</span>
       </div>
-      <figcaption style="margin-top:8px;">Mean temperatures by patch type across all clustering scenarios. As clustering increases, concrete temps rise while grass temps fall, with little change in the overall mean.</figcaption>
-    </figure>
+      <div class="landscape-card">
+        <img src="5clustering.png" alt="Model landscape at clustering level 5, moderate clustering of concrete and grass" />
+        <span class="landscape-label" style="background:var(--blue-light); color:#3a6ea5;">Moderate</span>
+      </div>
+      <div class="landscape-card">
+        <img src="10clustering.png" alt="Model landscape at clustering level 10, highly clustered concrete and grass" />
+        <span class="landscape-label" style="background:var(--purple-light); color:var(--purple);">Highly Clustered</span>
+      </div>
+    </div>
+    <p style="font-size:13px; color:var(--ink-faint); text-align:center; margin-top:-12px;">The model landscape at each clustering level, showing how concrete (gray) and grass (green) patches are arranged.</p>
   </div>
 
   <div class="brief-section">
