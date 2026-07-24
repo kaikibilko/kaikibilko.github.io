@@ -22,6 +22,8 @@
       --indigo-light: #e4e3f8;
       --purple: #3D1A78;
       --purple-light: #ece5f5;
+      --coffee-dark: #6F4E37;
+      --coffee-light: #ecdfd2;
       --tag-bg: #efefef;
     }
 
@@ -325,6 +327,82 @@
     .project-thumb-gis { border-top: 3px solid var(--teal-dark); }
     .project-thumb-abm { border-top: 3px solid var(--purple); }
 
+    /* ADDITIONAL WORK (secondary, smaller-footprint section) */
+    .additional-work {
+      background: #f2f0ea;
+    }
+    .additional-work-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 32px;
+    }
+    .additional-work-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 6px;
+    }
+    .additional-work-note {
+      font-size: 13px;
+      color: var(--ink-faint);
+      max-width: 560px;
+      margin-bottom: 20px;
+    }
+    .aw-card {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 16px 20px;
+      text-decoration: none;
+      max-width: 620px;
+      transition: border-color 0.2s;
+    }
+    .aw-card:hover { border-color: var(--coffee-dark); }
+    .aw-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 6px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--rule);
+    }
+    .aw-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .aw-body { flex: 1; }
+    .aw-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--coffee-dark);
+      margin-bottom: 3px;
+    }
+    .aw-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .aw-summary { font-size: 13px; color: var(--ink-light); }
+    .aw-link {
+      font-size: 13px;
+      color: var(--coffee-dark);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    @media (max-width: 720px) {
+      .aw-card { flex-direction: column; align-items: flex-start; }
+    }
+
     /* EDUCATION */
     .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .edu-card {
@@ -492,6 +570,23 @@
 
   </div>
 </section>
+
+<!-- ADDITIONAL WORK -->
+<div class="additional-work">
+  <div class="additional-work-inner">
+    <p class="additional-work-label">Additional Work</p>
+    <p class="additional-work-note">Outside my core focus areas, I also practice data storytelling and visual analytics on a range of subjects, since the skills transfer even when the topic doesn't.</p>
+    <a class="aw-card" href="project-coffee.html">
+      <span class="aw-icon"><img src="defects.png" alt="Line chart of median coffee score by total physical defect count" /></span>
+      <span class="aw-body">
+        <span class="aw-eyebrow">Data Visualization</span>
+        <span class="aw-title">Exploring What Makes a Great Coffee</span>
+        <span class="aw-summary">Analyzing 1,300+ professionally rated coffees to find what drives quality scores.</span>
+      </span>
+      <span class="aw-link">Read the brief →</span>
+    </a>
+  </div>
+</div>
 
 <!-- EDUCATION -->
 <section id="education">
