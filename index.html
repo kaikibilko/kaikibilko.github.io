@@ -364,36 +364,38 @@
     }
     .aw-card:hover { border-color: var(--coffee-dark); }
     .aw-icon {
-      width: 64px;
-      height: 64px;
+      width: 40px;
+      height: 40px;
       border-radius: 6px;
-      overflow: hidden;
+      background: var(--coffee-light);
+      color: var(--coffee-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
       flex-shrink: 0;
-      border: 1px solid var(--rule);
     }
-    .aw-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .aw-body { flex: 1; }
+    .aw-body { flex: 1; min-width: 0; }
     .aw-eyebrow {
+      display: block;
       font-family: 'DM Mono', monospace;
       font-size: 11px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--coffee-dark);
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .aw-title {
+      display: block;
       font-size: 15px;
       font-weight: 700;
       color: var(--ink);
-      margin-bottom: 2px;
+      margin-bottom: 4px;
+      line-height: 1.3;
     }
-    .aw-summary { font-size: 13px; color: var(--ink-light); }
+    .aw-summary { display: block; font-size: 13px; color: var(--ink-light); line-height: 1.5; }
     .aw-link {
+      display: block;
       font-size: 13px;
       color: var(--coffee-dark);
       font-weight: 500;
@@ -574,10 +576,10 @@
 <!-- ADDITIONAL WORK -->
 <div class="additional-work">
   <div class="additional-work-inner">
-    <p class="additional-work-label">Additional Work</p>
+    <p class="additional-work-label">3rd Project - Additional Work</p>
     <p class="additional-work-note">Outside my core focus areas, I also practice data storytelling and visual analytics on a range of subjects, since the skills transfer even when the topic doesn't.</p>
     <a class="aw-card" href="project-coffee.html">
-      <span class="aw-icon"><img src="defects.png" alt="Line chart of median coffee score by total physical defect count" /></span>
+      <span class="aw-icon">☕</span>
       <span class="aw-body">
         <span class="aw-eyebrow">Data Visualization</span>
         <span class="aw-title">Exploring What Makes a Great Coffee</span>
